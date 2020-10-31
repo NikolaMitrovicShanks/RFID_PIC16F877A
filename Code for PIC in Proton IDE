@@ -1,0 +1,70 @@
+Device = 16F877A
+All_Digital true
+Config XT_OSC, _                    'Koriscenje eksternog oscilatora frekvencije vece od 4Mhz
+WDT_OFF, _                          'Onemogucavanje internog tajmera
+PWRTE_OFF,_                         'Onemogucavanje internog tajmera koji sluzi za resetovanje
+LVP_OFF,_                           'Onemogucavanje niskonaponske ICSP komunikacije
+CP_OFF,_                            'Onemogucavanje zastite koda
+CPD_OFF                             'Onemogucavanje zastite podataka sacuvanih u EEPROM-u
+Xtal 4
+
+Declare Hserial_Baud = 9600         'Definisanje baud rate-a 
+Declare Hserial_RCSTA = %10010000   'Omogucavanje prijema
+Declare Hserial_TXSTA = %00100100   'Omogucavanje slanja
+Declare Hserial_Clear= On           'Onemogucavanje overflow-a
+
+Declare LCD_Type 0                  'Displej je alfanumericki
+Declare LCD_DTPin PORTD.4           'Pinovi na koje se salju podaci pocinju od pina D4
+Declare LCD_ENPin PORTC.5           'Enable pin je pinu C5
+Declare LCD_Interface 4             'Komunikacije ide preko 4 linije
+Declare LCD_RSPin PORTC.4           'Kominikacija sa registrima se odvija preko pina C4
+Declare LCD_Lines 2                 'Displej treba da ispisuje dve linije
+DelayMS 1500                        'Postavljanje kratakog delaya kako bismo bili sigurni da se displej inicijalizovao
+
+Dim Ulaz[32] As Byte                'Definisanje niza stringova za upis podataka
+Dim i As Byte
+Dim n As Byte
+
+Symbol TestLED = PORTD.2
+Output TestLED
+Symbol Buzzer = PORTC.3
+Output Buzzer
+'symbol TX_Pin = portc.6
+'symbol RX_Pin = portc.7
+
+main: 
+'Print At 1,1, "Displej aktivan"
+'DelayMS 100
+'Cls
+High Buzzer
+DelayMS 100
+Low Buzzer
+
+HSerIn 50,main,[Str Ulaz]           'Komunikacija izmedju pic-a i citaca
+High TestLED
+For i = 0 To 15 Step 1
+    Print At 1,i, " ", Dec1 Ulaz[i]
+    DelayMS 100
+Next
+
+'For n = 0 To 15 Step 1
+'    Print At 2,i, " ", Dec1 Ulaz[15+n]
+'    DelayMS 100
+'Next
+
+'HSerOut ["Poruka,13,10"]
+'hserout1 ["Poruka2,13,10"]
+
+Low TestLED
+DelayMS 200
+High TestLED
+'High Buzzer
+DelayMS 200
+'Low Buzzer
+
+'DelayMS 1000
+Cls
+
+GoTo main
+
+End
