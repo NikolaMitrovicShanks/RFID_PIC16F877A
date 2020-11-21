@@ -78,7 +78,7 @@ RDM6300 is connected to PIC16F877A through UART pins of the PIC. Display is conn
 Step 4: Ordering the PCBs
 After the both schematics and layout is done, next step is ordering the PCB. For ordering, best site that I have come to is JLCPCB. To order, just go to their website, register, and go to Quote now button. 
  
-JLCPCB is sponsor of this project. JLCPCB (Shenzhen JLC Electronics Co., Ltd.), is the largest PCB prototype enterprise in China and a high-tech manufacturer specializing in quick PCB prototype and small-batch PCB production. You can order a minimum of 5 PCBs for just $2.
+JLCPCB (https://jlcpcb.com/) is sponsor of this project. JLCPCB (Shenzhen JLC Electronics Co., Ltd.), is the largest PCB prototype enterprise in China and a high-tech manufacturer specializing in quick PCB prototype and small-batch PCB production. You can order a minimum of 5 PCBs for just $2.
 
 Step 5: Add Your Gerber File
 To get your designed board, you need to upload the gerber files. Of course, JLCPCB site offers detailed instructions on how to generate gerber files for different softwares. When gerber files are generated, zip them, and upload them as a single file to JLCPCB. 
